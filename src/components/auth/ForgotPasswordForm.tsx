@@ -19,8 +19,8 @@ export const ForgotPasswordForm: React.FC = () => {
     try {
       await authApi.forgotPassword({ email });
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Помилка при відправці інструкцій');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Помилка при відправці інструкцій');
     } finally {
       setIsLoading(false);
     }

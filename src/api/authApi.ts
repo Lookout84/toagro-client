@@ -7,7 +7,7 @@ import {
   ResetPasswordData,
   ChangePasswordData,
   User,
-} from '@types/auth.types';
+} from '../types/auth.types';
 
 export const authApi = {
   register: (data: RegisterData) =>

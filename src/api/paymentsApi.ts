@@ -3,7 +3,7 @@ import {
   Payment,
   CreatePaymentData,
   PaymentResponse,
-} from '@types/payment.types';
+} from '../types/payment.types';
 
 export const paymentsApi = {
   createPayment: (data: CreatePaymentData) =>

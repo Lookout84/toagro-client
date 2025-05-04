@@ -263,7 +263,7 @@ import { Input } from '@components/common/Input';
 import { Badge } from '@components/common/Badge';
 import { Pagination } from '@components/common/Pagination';
 import { Dropdown } from '@components/common/Dropdown';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../../types/listing.types';
 import { formatCurrency, formatDate } from '@utils/formatters';
 import { 
   MagnifyingGlassIcon, 
@@ -271,7 +271,7 @@ import {
   XCircleIcon,
   EyeIcon,
   PencilIcon,
-  BanIcon,
+  NoSymbolIcon,
   ArrowTopRightOnSquareIcon
 } from '@heroicons/react/24/outline';
 import { Spinner } from '@components/common/Spinner';
@@ -326,8 +326,8 @@ export const AdminListings: React.FC<AdminListingsProps> = ({
       
       // Mock data with status field
       const mockListings: Listing[] = Array.from({ length: 50 }, (_, i) => {
-        const statuses = ['active', 'inactive', 'pending'];
-        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+        const statuses = ['active', 'inactive', 'pending'] as const;
+        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)] as "active" | "inactive" | "pending";
         const categories = ['Пшениця', 'Кукурудза', 'Соя', 'Картопля'];
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
         
@@ -420,7 +420,7 @@ export const AdminListings: React.FC<AdminListingsProps> = ({
     }
   };
 
-  const handleAction = (callback: Function | undefined, ...args: any[]) => {
+  const handleAction = <T extends unknown[]>(callback: ((...args: T) => void) | undefined, ...args: T) => {
     if (callback) callback(...args);
   };
 
@@ -593,7 +593,7 @@ export const AdminListings: React.FC<AdminListingsProps> = ({
                             variant="ghost"
                             size="sm"
                             onClick={() => handleAction(onDeactivate, listing.id)}
-                            icon={<BanIcon className="h-5 w-5 text-orange-500" />}
+                            icon={<NoSymbolIcon className="h-5 w-5 text-orange-500" />}
                             aria-label="Деактивувати"
                           />
                         ) : (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@store/hooks';
-import { Conversation } from '@types/chat.types';
+import { Conversation } from '../../types/chat.types';
 import { formatRelativeTime } from '@utils/formatters';
 import { Badge } from '@components/common/Badge';
 

@@ -10,6 +10,7 @@ export interface Listing {
     createdAt: string;
     updatedAt: string;
     active: boolean;
+    status: 'active' | 'inactive' | 'pending';
     images: string[];
     views: number;
     user: {

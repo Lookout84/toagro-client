@@ -5,7 +5,7 @@ import {
   UpdateListingData,
   ListingFilters,
   ListingsResponse,
-} from '@types/listing.types';
+} from '../types/listing.types';
 
 export const listingsApi = {
   getListings: (params?: ListingFilters) =>

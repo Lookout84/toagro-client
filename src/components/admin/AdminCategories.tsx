@@ -4,7 +4,7 @@ import { Button } from '@components/common/Button';
 import { Input } from '@components/common/Input';
 import { Modal } from '@components/common/Modal';
 import { Dropdown } from '@components/common/Dropdown';
-import { Category } from '@types/category.types';
+import { Category } from '../../types/category.types';
 import { 
   PlusIcon, 
   PencilIcon, 
@@ -12,7 +12,6 @@ import {
   TagIcon,
   CheckCircleIcon,
   XCircleIcon,
-  PhotoIcon
 } from '@heroicons/react/24/outline';
 
 interface AdminCategoriesProps {
@@ -229,7 +228,10 @@ export const AdminCategories: React.FC<AdminCategoriesProps> = ({
 
       {/* Categories Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((category) => (
+        {loading ? (
+          <div className="col-span-full text-center">Loading categories...</div>
+        ) : (
+          categories.map((category) => (
           <Card key={category.id} className="hover:shadow-lg transition-shadow">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">

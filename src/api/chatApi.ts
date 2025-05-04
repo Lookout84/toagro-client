@@ -4,7 +4,7 @@ import {
   Conversation,
   SendMessageData,
   ConversationResponse,
-} from '@types/chat.types';
+} from '../types/chat.types';
 
 export const chatApi = {
   sendMessage: (data: SendMessageData) =>

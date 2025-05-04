@@ -5,7 +5,7 @@ import { Input } from '@components/common/Input';
 import { Badge } from '@components/common/Badge';
 import { Pagination } from '@components/common/Pagination';
 import { Dropdown } from '@components/common/Dropdown';
-import { Payment } from '@types/payment.types';
+import { Payment } from '../../types/payment.types';
 import { formatCurrency, formatDate } from '@utils/formatters';
 import { 
   MagnifyingGlassIcon,
@@ -185,6 +185,11 @@ export const AdminPayments: React.FC<AdminPaymentsProps> = ({ onRefund, onViewDe
       {/* Payments Table */}
       <Card>
         <div className="overflow-x-auto">
+          {loading ? (
+            <div className="flex justify-center items-center py-8">
+              <ArrowPathIcon className="h-8 w-8 text-gray-400 animate-spin" />
+            </div>
+          ) : (
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -280,6 +285,7 @@ export const AdminPayments: React.FC<AdminPaymentsProps> = ({ onRefund, onViewDe
               ))}
             </tbody>
           </table>
+          )}
         </div>
       </Card>
 

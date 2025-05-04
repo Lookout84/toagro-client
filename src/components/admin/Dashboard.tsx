@@ -46,11 +46,18 @@ export const Dashboard: React.FC = () => {
   const fetchDashboardData = async () => {
     setIsLoading(true);
     try {
-      // TODO: Call API to fetch dashboard data
-      // const response = await dashboardApi.getStats();
-      // setStats(response.data);
-    } catch (err) {
-      setError('Помилка завантаження даних dashboard');
+      // Temporary mock data until API is implemented
+      setStats({
+        totalUsers: 2456,
+        totalListings: 1234,
+        totalRevenue: 45890,
+        newUsersToday: 23,
+        userGrowth: 12.5,
+        listingGrowth: -2.3,
+        revenueGrowth: 8.7,
+      });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Помилка завантаження даних dashboard');
     } finally {
       setIsLoading(false);
     }
@@ -91,6 +98,10 @@ export const Dashboard: React.FC = () => {
     return <Alert variant="error" title="Помилка">{error}</Alert>;
   }
 
+  if (isLoading) {
+    return <div className="flex justify-center items-center">Loading...</div>;
+  }
+
   return (
     <div className="space-y-6">
       {/* Stats Grid */}
@@ -125,16 +136,19 @@ export const Dashboard: React.FC = () => {
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card title="Продажі за останні 30 днів">
+        <Card>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Продажі за останні 30 днів</h3>
           <SalesChart />
         </Card>
-        <Card title="Реєстрації користувачів">
+        <Card>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Реєстрації користувачів</h3>
           <UsersChart />
         </Card>
       </div>
 
       {/* Full Width Chart */}
-      <Card title="Динаміка оголошень">
+      <Card>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Динаміка оголошень</h3>
         <ListingsChart />
       </Card>
 

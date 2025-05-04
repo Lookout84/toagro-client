@@ -3,7 +3,7 @@ import {
   Notification,
   NotificationSettings,
   NotificationPreferences,
-} from '@types/notification.types';
+} from '../types/notification.types';
 
 export const notificationsApi = {
   getNotifications: (params?: { page?: number; limit?: number }) =>

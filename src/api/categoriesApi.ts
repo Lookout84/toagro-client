@@ -5,7 +5,7 @@ import {
   CreateCategoryData,
   UpdateCategoryData,
   CategoryFilters,
-} from '@types/category.types';
+} from '../types/category.types';
 
 export const categoriesApi = {
   getCategories: (params?: CategoryFilters) =>

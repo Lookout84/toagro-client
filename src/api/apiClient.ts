@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { store } from '@store/index';
 import { logout } from '@store/slices/authSlice';
 
@@ -11,7 +11,7 @@ const apiClient: AxiosInstance = axios.create({
 
 // Request interceptor для додавання токена
 apiClient.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     const state = store.getState();
     const token = state.auth.token;
     

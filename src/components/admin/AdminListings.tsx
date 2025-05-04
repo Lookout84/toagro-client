@@ -5,7 +5,7 @@ import { Input } from '@components/common/Input';
 import { Badge } from '@components/common/Badge';
 import { Pagination } from '@components/common/Pagination';
 import { Dropdown } from '@components/common/Dropdown';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../../types/listing.types';
 import { formatCurrency, formatDate } from '@utils/formatters';
 import { 
   MagnifyingGlassIcon, 
@@ -18,7 +18,6 @@ import {
 
 interface AdminListingsProps {
   onApprove?: (listingId: number) => void;
-  onReject?: (listingId: number) => void;
   onView?: (listing: Listing) => void;
   onEdit?: (listing: Listing) => void;
   onDeactivate?: (listingId: number) => void;
@@ -26,7 +25,6 @@ interface AdminListingsProps {
 
 export const AdminListings: React.FC<AdminListingsProps> = ({
   onApprove,
-  onReject,
   onView,
   onEdit,
   onDeactivate
@@ -64,6 +62,7 @@ export const AdminListings: React.FC<AdminListingsProps> = ({
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         active: Math.random() > 0.3,
+        status: 'active',
         images: ['https://via.placeholder.com/150'],
         views: Math.floor(Math.random() * 1000),
         user: {
@@ -140,6 +139,11 @@ export const AdminListings: React.FC<AdminListingsProps> = ({
 
       {/* Listings Table */}
       <Card>
+        {loading ? (
+          <div className="flex justify-center items-center p-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          </div>
+        ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -230,19 +234,20 @@ export const AdminListings: React.FC<AdminListingsProps> = ({
                           icon={<CheckCircleIcon className="h-5 w-5" />}
                         />
                       )}
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => window.open(`/listings/${listing.id}`, '_blank')}
-                        icon={<ArrowTopRightOnSquareIcon className="h-5 w-5" />}
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => window.open(`/listings/${listing.id}`, '_blank')}
+                  icon={<ArrowTopRightOnSquareIcon className="h-5 w-5" />}
+                />
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
           </table>
         </div>
+        )}
       </Card>
 
       {/* Pagination */}

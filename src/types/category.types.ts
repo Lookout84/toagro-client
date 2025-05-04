@@ -33,7 +33,7 @@ export interface Category {
     active?: boolean;
   }
   
-  export interface UpdateCategoryData extends Partial<CreateCategoryData> {}
+  export type UpdateCategoryData = Partial<CreateCategoryData>;
   
   export interface CategoryFilters {
     active?: boolean;
