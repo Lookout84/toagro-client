@@ -10,8 +10,7 @@ import {
   BellIcon, 
   CreditCardIcon, 
   ShieldCheckIcon,
-  EnvelopeIcon,
-  GlobeEuropeAfricaIcon
+  EnvelopeIcon
 } from '@heroicons/react/24/outline';
 
 export const AdminSettingsPage: React.FC = () => {
@@ -28,12 +27,6 @@ export const AdminSettingsPage: React.FC = () => {
     { value: 'UAH', label: 'UAH (₴)' },
     { value: 'USD', label: 'USD ($)' },
     { value: 'EUR', label: 'EUR (€)' },
-  ];
-
-  const notificationTypes = [
-    { value: 'email', label: 'Email' },
-    { value: 'sms', label: 'SMS' },
-    { value: 'push', label: 'Push-сповіщення' },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {

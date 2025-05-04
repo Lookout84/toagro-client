@@ -7,7 +7,7 @@ export interface Notification {
     read: boolean;
     readAt?: string;
     priority: 'LOW' | 'NORMAL' | 'HIGH';
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
     linkUrl?: string;
     createdAt: string;
     updatedAt: string;

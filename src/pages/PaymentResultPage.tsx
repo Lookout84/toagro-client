@@ -12,8 +12,7 @@ import {
   XCircleIcon, 
   ClockIcon,
   ArrowLeftIcon,
-  CloudArrowDownIcon,
-  CreditCardIcon
+  CloudArrowDownIcon
 } from '@heroicons/react/24/outline';
 
 export const PaymentResultPage: React.FC = () => {

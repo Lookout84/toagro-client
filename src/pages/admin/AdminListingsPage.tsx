@@ -1,7 +1,7 @@
 import React from 'react';
 import { AdminLayout } from '@components/layout/AdminLayout';
 import { AdminListings } from '@components/admin/AdminListings';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../../types/listing.types';
 
 export const AdminListingsPage: React.FC = () => {
   const handleApprove = (listingId: number) => {

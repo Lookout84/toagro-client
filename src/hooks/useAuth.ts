@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { login, logout, register } from '@store/slices/authSlice';
-import { LoginData, RegisterData } from '@types/auth.types';
+import { LoginData, RegisterData } from '../types/auth.types';
 
 export const useAuth = () => {
   const dispatch = useAppDispatch();

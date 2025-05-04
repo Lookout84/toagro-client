@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchConversation, markAsRead } from '@store/slices/chatSlice';
 import { ChatMessage } from '@components/chat/ChatMessage';
 import { MessageForm } from '@components/chat/MessageForm';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../../types/listing.types';
 import { Card } from '@components/common/Card';
 import { formatCurrency } from '@utils/formatters';
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { ChatMessage as MessageType } from '@types/chat.types';
+import {  Message } from '../../types/chat.types';
 import { formatDate } from '@utils/formatters';
 
 interface ChatMessageProps {
-  message: MessageType;
+  message: Message;
   isOwnMessage: boolean;
 }
 

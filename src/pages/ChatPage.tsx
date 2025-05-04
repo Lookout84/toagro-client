@@ -5,7 +5,7 @@ import { fetchConversations, setCurrentConversation } from '@store/slices/chatSl
 import { MainLayout } from '@components/layout/MainLayout';
 import { ChatList } from '@components/chat/ChatList';
 import { ChatWindow } from '@components/chat/ChatWindow';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../types/listing.types';
 
 export const ChatPage: React.FC = () => {
   const dispatch = useAppDispatch();

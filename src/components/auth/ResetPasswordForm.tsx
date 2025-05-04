@@ -28,12 +28,17 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) =
     setError(null);
 
     try {
-      await authApi.resetPassword(token, { password });
+      await authApi.resetPassword(token, { token, password });
       navigate('/login', { 
         state: { message: 'Пароль успішно змінено. Тепер ви можете увійти.' }
       });
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Помилка при зміні пароля');
+    } catch (err: unknown) {
+      if (err && typeof err === 'object' && 'response' in err) {
+        const errorResponse = err as { response?: { data?: { message?: string } } };
+        setError(errorResponse.response?.data?.message || 'Помилка при зміні пароля');
+      } else {
+        setError('Помилка при зміні пароля');
+      }
     } finally {
       setIsLoading(false);
     }
