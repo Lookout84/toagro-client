@@ -26,7 +26,7 @@ import { NotFoundPage } from '@pages/NotFoundPage';
 // Admin Pages
 import { AdminDashboardPage } from '@pages/admin/AdminDashboardPage';
 import { AdminUsersPage } from '@pages/admin/AdminUsersPage';
-import { AdminListingsPage } from '@pages/admin/AdminListingsPage';
+import { AdminListingsPage } from '@/pages/admin/AdminListingsPage';
 import { AdminCategoriesPage } from '@pages/admin/AdminCategoriesPage';
 import { AdminPaymentsPage } from '@pages/admin/AdminPaymentsPage';
 import { AdminSettingsPage } from '@pages/admin/AdminSettingsPage';
