@@ -35,8 +35,8 @@ export const useApi = <T,>(
       const axiosError = error as AxiosError;
       let errorMessage = 'Щось пішло не так';
       
-      if (axiosError.response?.data?.message) {
-        errorMessage = axiosError.response.data.message;
+      if ((axiosError.response?.data as { message?: string })?.message) {
+        errorMessage = (axiosError.response?.data as { message?: string })?.message || errorMessage;
       } else if (axiosError.message) {
         errorMessage = axiosError.message;
       }

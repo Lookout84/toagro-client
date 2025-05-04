@@ -1,15 +1,15 @@
 // Storage utility functions with type safety and error handling
 
 interface StorageOptions {
-    serializer?: (value: any) => string;
-    deserializer?: (value: string) => any;
+    serializer?: (value: unknown) => string;
+    deserializer?: (value: string) => unknown;
   }
   
   class Storage {
     private storage: globalThis.Storage;
     private prefix: string;
-    private serializer: (value: any) => string;
-    private deserializer: (value: string) => any;
+    private serializer: (value: unknown) => string;
+    private deserializer: (value: string) => unknown;
   
     constructor(storage: globalThis.Storage, prefix = '', options: StorageOptions = {}) {
       this.storage = storage;
@@ -23,10 +23,10 @@ interface StorageOptions {
     }
   
     // Get item from storage
-    getItem<T = any>(key: string): T | null {
+    getItem<T = unknown>(key: string): T | null {
       try {
         const item = this.storage.getItem(this.getKey(key));
-        return item ? this.deserializer(item) : null;
+        return item ? (this.deserializer(item) as T) : null;
       } catch (error) {
         console.error(`Error getting item from storage: ${error}`);
         return null;
@@ -34,7 +34,7 @@ interface StorageOptions {
     }
   
     // Set item in storage
-    setItem<T = any>(key: string, value: T): boolean {
+    setItem<T = unknown>(key: string, value: T): boolean {
       try {
         this.storage.setItem(this.getKey(key), this.serializer(value));
         return true;
@@ -73,7 +73,7 @@ interface StorageOptions {
     }
   
     // Get multiple items at once
-    getItems<T = any>(keys: string[]): Record<string, T | null> {
+    getItems<T = unknown>(keys: string[]): Record<string, T | null> {
       return keys.reduce((acc, key) => {
         acc[key] = this.getItem<T>(key);
         return acc;
@@ -81,7 +81,7 @@ interface StorageOptions {
     }
   
     // Set multiple items at once
-    setItems<T = any>(items: Record<string, T>): boolean {
+    setItems<T>(items: Record<string, T>): boolean {
       try {
         Object.entries(items).forEach(([key, value]) => {
           this.setItem(key, value);

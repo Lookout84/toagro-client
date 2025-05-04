@@ -3,7 +3,7 @@ import { store } from '@store/index';
 import { logout } from '@store/slices/authSlice';
 
 // API Response type
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data: T;
   message?: string;
   success: boolean;
@@ -17,7 +17,7 @@ export interface ApiError {
 }
 
 // Create a request wrapper with type safety
-export const request = async <T = any>(
+export const request = async <T = unknown>(
   config: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
@@ -34,7 +34,11 @@ export const handleApiError = (error: AxiosError): ApiError => {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     const status = error.response.status;
-    const data = error.response.data as any;
+    interface ErrorResponseData {
+      message?: string;
+      code?: string;
+    }
+    const data = error.response.data as ErrorResponseData;
 
     // Handle specific error codes
     switch (status) {
@@ -111,19 +115,19 @@ export const handleApiError = (error: AxiosError): ApiError => {
 
 // API utility functions
 export const api = {
-  get: <T = any>(url: string, config?: AxiosRequestConfig) =>
+  get: <T = unknown>(url: string, config?: AxiosRequestConfig) =>
     request<T>({ ...config, method: 'GET', url }),
 
-  post: <T = any>(url: string, data?: any, config?: AxiosRequestConfig) =>
+  post: <T = unknown>(url: string, data?: Record<string, unknown>, config?: AxiosRequestConfig) =>
     request<T>({ ...config, method: 'POST', url, data }),
 
-  put: <T = any>(url: string, data?: any, config?: AxiosRequestConfig) =>
+  put: <T = unknown>(url: string, data?: Record<string, unknown>, config?: AxiosRequestConfig) =>
     request<T>({ ...config, method: 'PUT', url, data }),
 
-  patch: <T = any>(url: string, data?: any, config?: AxiosRequestConfig) =>
+  patch: <T = unknown>(url: string, data?: Record<string, unknown>, config?: AxiosRequestConfig) =>
     request<T>({ ...config, method: 'PATCH', url, data }),
 
-  delete: <T = any>(url: string, config?: AxiosRequestConfig) =>
+  delete: <T = unknown>(url: string, config?: AxiosRequestConfig) =>
     request<T>({ ...config, method: 'DELETE', url }),
 };
 

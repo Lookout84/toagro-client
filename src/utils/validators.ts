@@ -9,7 +9,7 @@ export const validateEmail = (email: string): boolean => {
 // Phone number validation (Ukrainian format)
 export const validatePhoneNumber = (phone: string): boolean => {
   const phoneRegex = /^(\+38)?0[0-9]{9}$/;
-  const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+  const cleaned = phone.replace(/[\s\-()]/g, '');
   return phoneRegex.test(cleaned);
 };
 

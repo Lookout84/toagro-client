@@ -4,10 +4,8 @@ import {
   User,
   LoginData,
   RegisterData,
-  ForgotPasswordData,
-  ResetPasswordData,
   ChangePasswordData,
-} from '@types/auth.types';
+} from '../../types/auth.types';
 
 interface AuthState {
   user: User | null;
