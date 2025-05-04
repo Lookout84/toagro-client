@@ -1,21 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { 
-  persistStore, 
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER
-} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { rootReducer } from './rootReducer';
+import rootReducer from './rootReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'user'], // Зберігати лише аутентифікацію та дані користувача
+  whitelist: ['auth', 'ui'], // persist only auth and ui
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -25,10 +16,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: ['persist/PERSIST'],
       },
     }),
-  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export const persistor = persistStore(store);

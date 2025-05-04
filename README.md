@@ -53,7 +53,7 @@ export default tseslint.config({
 })
 ``` -->
 
-toagro-frontend/
+toagro-client/
 ├── .eslintrc.json
 ├── .gitignore
 ├── index.html

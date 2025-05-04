@@ -8,7 +8,7 @@ import userReducer from './slices/userSlice';
 import notificationsReducer from './slices/notificationsSlice';
 import uiReducer from './slices/uiSlice';
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
   listings: listingsReducer,
   categories: categoriesReducer,
@@ -18,3 +18,5 @@ export const rootReducer = combineReducers({
   notifications: notificationsReducer,
   ui: uiReducer,
 });
+
+export default rootReducer;

@@ -1,81 +1,55 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-interface UiState {
-  isSidebarOpen: boolean;
-  isModalOpen: boolean;
-  modalContent: React.ReactNode | null;
-  modalTitle: string;
-  isLoading: boolean;
-  toast: {
-    show: boolean;
-    message: string;
-    type: 'success' | 'error' | 'info' | 'warning' | null;
-  };
+interface UIState {
   theme: 'light' | 'dark';
+  sidebarOpen: boolean;
+  notifications: {
+    id: string;
+    type: 'success' | 'error' | 'warning' | 'info';
+    message: string;
+  }[];
 }
 
-const initialState: UiState = {
-  isSidebarOpen: false,
-  isModalOpen: false,
-  modalContent: null,
-  modalTitle: '',
-  isLoading: false,
-  toast: {
-    show: false,
-    message: '',
-    type: null,
-  },
+const initialState: UIState = {
   theme: 'light',
+  sidebarOpen: false,
+  notifications: [],
 };
 
 const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    toggleSidebar: (state) => {
-      state.isSidebarOpen = !state.isSidebarOpen;
-    },
-    openModal: (state, action: PayloadAction<{ title: string; content: React.ReactNode }>) => {
-      state.isModalOpen = true;
-      state.modalTitle = action.payload.title;
-      state.modalContent = action.payload.content;
-    },
-    closeModal: (state) => {
-      state.isModalOpen = false;
-      state.modalContent = null;
-      state.modalTitle = '';
-    },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
-    showToast: (state, action: PayloadAction<{ message: string; type: 'success' | 'error' | 'info' | 'warning' }>) => {
-      state.toast = {
-        show: true,
-        message: action.payload.message,
-        type: action.payload.type,
-      };
-    },
-    hideToast: (state) => {
-      state.toast.show = false;
-    },
     toggleTheme: (state) => {
       state.theme = state.theme === 'light' ? 'dark' : 'light';
     },
-    setTheme: (state, action: PayloadAction<'light' | 'dark'>) => {
+    setTheme: (state, action) => {
       state.theme = action.payload;
+    },
+    toggleSidebar: (state) => {
+      state.sidebarOpen = !state.sidebarOpen;
+    },
+    setSidebarOpen: (state, action) => {
+      state.sidebarOpen = action.payload;
+    },
+    addNotification: (state, action) => {
+      const id = Date.now().toString();
+      state.notifications.push({ ...action.payload, id });
+    },
+    removeNotification: (state, action) => {
+      state.notifications = state.notifications.filter(
+        (notification) => notification.id !== action.payload
+      );
     },
   },
 });
 
 export const {
-  toggleSidebar,
-  openModal,
-  closeModal,
-  setLoading,
-  showToast,
-  hideToast,
   toggleTheme,
   setTheme,
+  toggleSidebar,
+  setSidebarOpen,
+  addNotification,
+  removeNotification,
 } = uiSlice.actions;
-
 export default uiSlice.reducer;

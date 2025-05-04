@@ -1,0 +1,35 @@
+/* Light theme (default) */
+.theme-light {
+    --background-primary: var(--white);
+    --background-secondary: var(--off-white);
+    --background-tertiary: var(--gray-light);
+    
+    --text-primary: var(--gray-dark);
+    --text-secondary: var(--gray-medium);
+    --text-inverse: var(--white);
+    
+    --border-primary: #E0E0E0;
+    --border-secondary: #F0F0F0;
+    
+    --card-background: var(--white);
+    --header-background: var(--primary-green);
+    --footer-background: var(--primary-green);
+  }
+  
+  /* Dark theme */
+  .theme-dark {
+    --background-primary: #121212;
+    --background-secondary: #1E1E1E;
+    --background-tertiary: #2A2A2A;
+    
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-inverse: var(--gray-dark);
+    
+    --border-primary: #333333;
+    --border-secondary: #404040;
+    
+    --card-background: #1E1E1E;
+    --header-background: var(--primary-green);
+    --footer-background: var(--primary-green);
+  }

@@ -1,41 +1,48 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { store } from '@/store';
+import { store } from '@store/index';
+import { logout } from '@store/slices/authSlice';
 
-// Створюємо базовий екземпляр axios
 const apiClient: AxiosInstance = axios.create({
-  baseURL: '/api', // Backend API URL
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Додаємо інтерцептор для автоматичного додавання токена до запитів
+// Request interceptor для додавання токена
 apiClient.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const state = store.getState();
     const token = state.auth.token;
     
-    if (token) {
-      config.headers = config.headers || {};
+    if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
-// Додаємо інтерцептор для обробки помилок
+// Response interceptor для обробки помилок
 apiClient.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  (error) => {
-    // Обробляємо 401 помилку (неавторизований)
-    if (error.response && error.response.status === 401) {
-      // Якщо сервер повертає 401, це означає, що токен не дійсний
-      // або закінчився термін його дії
-      store.dispatch({ type: 'auth/clearCredentials' });
+  (response: AxiosResponse) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Якщо отримали 401 помилку і це не запит на логін
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      
+      // Очищаємо токен та розлогіновуємо користувача
+      store.dispatch(logout());
+      window.location.href = '/login';
     }
-    
+
     return Promise.reject(error);
   }
 );

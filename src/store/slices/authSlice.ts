@@ -1,6 +1,13 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { authApi } from '@/api/authApi';
-import { User, LoginCredentials, RegisterData } from '@/types/auth.types';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { authApi } from '@api/authApi';
+import {
+  User,
+  LoginData,
+  RegisterData,
+  ForgotPasswordData,
+  ResetPasswordData,
+  ChangePasswordData,
+} from '@types/auth.types';
 
 interface AuthState {
   user: User | null;
@@ -18,78 +25,64 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Асинхронні дії для авторизації
 export const login = createAsyncThunk(
   'auth/login',
-  async (credentials: LoginCredentials, { rejectWithValue }) => {
+  async (data: LoginData, { rejectWithValue }) => {
     try {
-      const response = await authApi.login(credentials);
+      const response = await authApi.login(data);
       return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Помилка входу');
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || 'Login failed');
     }
   }
 );
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (userData: RegisterData, { rejectWithValue }) => {
+  async (data: RegisterData, { rejectWithValue }) => {
     try {
-      const response = await authApi.register(userData);
+      const response = await authApi.register(data);
       return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Помилка реєстрації');
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || 'Registration failed');
     }
   }
 );
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, { rejectWithValue }) => {
+export const changePassword = createAsyncThunk(
+  'auth/changePassword',
+  async (data: ChangePasswordData, { rejectWithValue }) => {
     try {
-      await authApi.logout();
-      return null;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Помилка виходу');
+      await authApi.changePassword(data);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to change password');
     }
   }
 );
 
-export const fetchCurrentUser = createAsyncThunk(
-  'auth/fetchCurrentUser',
-  async (_, { getState, rejectWithValue }) => {
-    try {
-      const { auth } = getState() as { auth: AuthState };
-      if (!auth.token) return rejectWithValue('No token');
-      
-      const response = await authApi.getCurrentUser();
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Помилка отримання даних користувача');
-    }
-  }
-);
+export const getProfile = createAsyncThunk('auth/getProfile', async () => {
+  const response = await authApi.getProfile();
+  return response.data;
+});
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    clearError: (state) => {
-      state.error = null;
-    },
-    setCredentials: (state, action: PayloadAction<{ user: User; token: string }>) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isAuthenticated = true;
-    },
-    clearCredentials: (state) => {
+    logout: (state) => {
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
+      state.error = null;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
-    // Обробка результатів асинхронних дій
     builder
       // Login
       .addCase(login.pending, (state) => {
@@ -98,9 +91,10 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isAuthenticated = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isAuthenticated = true;
+        state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -113,38 +107,34 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isAuthenticated = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isAuthenticated = true;
+        state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
       })
-      // Logout
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
-        state.token = null;
-        state.isAuthenticated = false;
-      })
-      // Fetch current user
-      .addCase(fetchCurrentUser.pending, (state) => {
+      // Change Password
+      .addCase(changePassword.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
-      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+      .addCase(changePassword.fulfilled, (state) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.error = null;
       })
-      .addCase(fetchCurrentUser.rejected, (state, action) => {
+      .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
-        state.user = null;
-        state.token = null;
-        state.isAuthenticated = false;
         state.error = action.payload as string;
+      })
+      // Get Profile
+      .addCase(getProfile.fulfilled, (state, action) => {
+        state.user = action.payload.user;
       });
   },
 });
 
-export const { clearError, setCredentials, clearCredentials } = authSlice.actions;
-
+export const { logout, setError, clearError } = authSlice.actions;
 export default authSlice.reducer;
