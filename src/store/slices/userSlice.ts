@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { userApi } from '@/api/userApi'; // Імпортуємо API для користувача
-import { User, UpdateUserData } from '../../types/user.types';
+import { BasicUserData, UpdateUserData } from '../../types/user.types';
 import { Listing } from '@/types/listing.types';
 
 interface UserState {
-  profile: User | null;
+  profile: BasicUserData | null;
   userListings: Listing[];
   isLoading: boolean;
   error: string | null;

@@ -15,13 +15,13 @@ interface ImportMetaEnv {
     // Add more env variables as needed
   }
   
-  interface ImportMeta {
+  export interface ImportMeta {
     readonly env: ImportMetaEnv;
   }
   
   // Module declarations for asset imports
   declare module '*.svg' {
-    import React = require('react');
+    import * as React from 'react';
     export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
     const src: string;
     export default src;

@@ -1,7 +1,14 @@
 import React from 'react';
 import { AdminLayout } from '@components/layout/AdminLayout';
-import { UsersList } from '../../components/admin/UsersList';
+import { UserListings } from '@/components/admin/UsersList';
 import { User } from '../../types/auth.types';
+
+export interface UserListingsProps {
+  onEdit: (userId: number) => void;
+  onDelete: (userId: number) => void;
+  onBanToggle: (userId: number, isBanned: boolean) => void;
+  // existing props
+}
 
 export const AdminUsersPage: React.FC = () => {
   const handleEdit = (user: User) => {
@@ -21,7 +28,7 @@ export const AdminUsersPage: React.FC = () => {
 
   return (
     <AdminLayout>
-      <UsersList
+      <UserListings
         onEdit={handleEdit}
         onDelete={handleDelete}
         onBanToggle={handleBanToggle}
