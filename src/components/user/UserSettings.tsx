@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { User } from '../../types/auth.types';
 import { Input } from '@components/common/Input';
 import { Button } from '@components/common/Button';
-import { Alert } from '@components/common/Alert';
 import { PencilIcon, CameraIcon } from '@heroicons/react/24/outline';
 
 interface UserSettingsProps {
