@@ -9,7 +9,7 @@ import { Button } from '@components/common/Button';
 import { ListingCard } from '@components/listings/ListingCard';
 import { CategoryCard } from '@components/categories/CategoryCard';
 import { Spinner } from '@components/common/Spinner';
-import { SearchIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
 export const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -60,7 +60,7 @@ export const HomePage: React.FC = () => {
           <Card>
             <form className="flex gap-4">
               <div className="flex-1 relative">
-                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Що ви шукаєте?"

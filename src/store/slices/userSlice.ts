@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from '@/api/userApi';
-import { User, UpdateUserData } from '@/types/user.types';
+import { userApi } from '@/api/userApi'; // Імпортуємо API для користувача
+import { User, UpdateUserData } from '../../types/user.types';
 import { Listing } from '@/types/listing.types';
 
 interface UserState {

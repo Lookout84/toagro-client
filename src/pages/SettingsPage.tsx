@@ -9,7 +9,7 @@ import { Input } from '@components/common/Input';
 import { Tabs } from '@components/common/Tabs';
 import { Alert } from '@components/common/Alert';
 import { UserSettings } from '@components/user/UserSettings';
-import { ChangePasswordData } from '@types/auth.types';
+import { ChangePasswordData } from '../types/auth.types';
 
 export const SettingsPage: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -232,8 +232,8 @@ export const AdminCategories: React.FC<AdminCategoriesProps> = ({
           <div className="col-span-full text-center">Loading categories...</div>
         ) : (
           categories.map((category) => (
-          <Card key={category.id} className="hover:shadow-lg transition-shadow">
-            <div className="flex items-start justify-between mb-4">
+            <Card key={category.id} className="hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
                 {category.image ? (
                   <img src={category.image} alt={category.name} className="h-10 w-10 rounded object-cover" />
@@ -286,7 +286,7 @@ export const AdminCategories: React.FC<AdminCategoriesProps> = ({
               </div>
             </div>
           </Card>
-        ))}
+        )))}
       </div>
 
       {/* Add Category Modal */}

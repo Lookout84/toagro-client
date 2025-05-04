@@ -20,4 +20,19 @@ export interface UserChangePasswordData {
   newPassword: string;
 }
 
+export type User = {
+  id: string;
+  email: string;
+  name: string;
+  phone?: string;
+  avatar?: string;
+};
+
+export interface UpdateUserData {
+  name?: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
+}
+
 export type UserData = UserProfile;
