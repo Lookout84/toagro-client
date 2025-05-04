@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@components/common/Card';
-import { Category } from '@types/category.types';
+import { Category } from '../../types/category.types';
 import { TagIcon } from '@heroicons/react/24/outline';
 
 interface CategoryListProps {

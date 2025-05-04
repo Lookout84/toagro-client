@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CategoryTree as TreeType } from '@types/category.types';
+import { CategoryTree as TreeType } from '../../types/category.types';
 import { ChevronRightIcon, ChevronDownIcon, TagIcon } from '@heroicons/react/24/outline';
 
 interface CategoryTreeProps {

@@ -11,7 +11,7 @@ import {
   CurrencyDollarIcon,
   CogIcon,
   ChartBarIcon,
-  ArrowRightOnSquareIcon,
+  ArrowTopRightOnSquareIcon,
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -127,7 +127,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                 size="sm"
                 className="flex-1"
                 onClick={handleLogout}
-                icon={<ArrowRightOnSquareIcon className="h-4 w-4" />}
+                icon={<ArrowTopRightOnSquareIcon className="h-4 w-4" />}
               >
                 Вихід
               </Button>

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { logout } from '@store/slices/authSlice';
 import { Button } from '@components/common/Button';
-import { UserCircleIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { UserCircleIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { toggleSidebar } from '@store/slices/uiSlice';
 import { NotificationBell } from '@components/notifications/NotificationBell';
 

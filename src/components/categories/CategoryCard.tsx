@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from '@components/common/Card';
-import { Category } from '@types/category.types';
+import { Category } from '../../types/category.types';
 
 interface CategoryCardProps {
   category: Category;

@@ -28,8 +28,8 @@ export const Rating: React.FC<RatingProps> = ({
   const [hoverValue, setHoverValue] = React.useState<number | null>(null);
 
   const getStarValue = (starIndex: number) => {
-    if (hoverValue !== null && !readonly) return hoverValue;
-    return value;
+    const currentValue = hoverValue !== null && !readonly ? hoverValue : value;
+    return currentValue > starIndex;
   };
 
   const handleMouseEnter = (starIndex: number) => {
@@ -53,7 +53,7 @@ export const Rating: React.FC<RatingProps> = ({
   return (
     <div className={`flex items-center gap-1 ${className}`}>
       {[...Array(5)].map((_, index) => {
-        const isFilled = getStarValue(index) > index;
+        const isFilled = getStarValue(index);
         const Icon = isFilled ? StarIcon : StarOutlineIcon;
         
         return (
