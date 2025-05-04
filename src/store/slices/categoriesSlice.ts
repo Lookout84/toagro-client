@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { categoriesApi } from '@api/categoriesApi';
-import { Category, CategoryTree, CategoryFilters } from '@types/category.types';
+import { Category, CategoryTree, CategoryFilters } from '../../types/category.types';
 
 interface CategoriesState {
   items: Category[];

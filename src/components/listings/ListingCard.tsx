@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from '@components/common/Card';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../../types/listing.types';
 import { formatCurrency, formatDate } from '@utils/formatters';
 import { MapPinIcon, ClockIcon, EyeIcon } from '@heroicons/react/24/outline';
 

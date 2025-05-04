@@ -5,8 +5,8 @@ import { Button } from '@components/common/Button';
 import { Card } from '@components/common/Card';
 import { Dropdown } from '@components/common/Dropdown';
 import { ImageUploader } from './ImageUploader';
-import { Category } from '@types/category.types';
-import { Listing, CreateListingData, UpdateListingData } from '@types/listing.types';
+import { Category } from '../../types/category.types';
+import { Listing, CreateListingData, UpdateListingData } from '../../types/listing.types';
 import { useAppDispatch } from '@store/hooks';
 import { createListing, updateListing } from '@store/slices/listingsSlice';
 
@@ -42,7 +42,7 @@ export const ListingForm: React.FC<ListingFormProps> = ({ listing, categories, o
     const category = categories.find((cat) => cat.id === categoryId);
     setFormData((prev) => ({
       ...prev,
-      categoryId,
+      categoryId: categoryId?.toString() || '',
       category: category?.name || '',
     }));
   };
@@ -63,7 +63,7 @@ export const ListingForm: React.FC<ListingFormProps> = ({ listing, categories, o
         price: Number(formData.price),
         location: formData.location,
         category: formData.category,
-        categoryId: formData.categoryId || undefined,
+        categoryId: formData.categoryId ? Number(formData.categoryId) : undefined,
         images: formData.images,
       };
 
@@ -74,8 +74,12 @@ export const ListingForm: React.FC<ListingFormProps> = ({ listing, categories, o
         const result = await dispatch(createListing(data as CreateListingData)).unwrap();
         navigate(`/listings/${result.listing.id}`);
       }
-    } catch (err: any) {
-      setError(err.message || 'Помилка при збереженні оголошення');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Помилка при збереженні оголошення');
+      } else {
+        setError('Помилка при збереженні оголошення');
+      }
     } finally {
       setIsSubmitting(false);
     }

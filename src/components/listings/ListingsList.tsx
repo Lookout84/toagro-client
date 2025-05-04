@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListingCard } from './ListingCard';
-import { Listing } from '@types/listing.types';
+import { Listing } from '../../types/listing.types';
 import { Spinner } from '@components/common/Spinner';
 
 interface ListingsListProps {

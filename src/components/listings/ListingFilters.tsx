@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Input } from '@components/common/Input';
 import { Button } from '@components/common/Button';
 import { Dropdown } from '@components/common/Dropdown';
-import { Category } from '@types/category.types';
-import { ListingFilters as FilterType } from '@types/listing.types';
+import { Category } from '../../types/category.types';
+import { ListingFilters as FilterType } from '../../types/listing.types';
 import { MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline';
 
 interface ListingFiltersProps {
