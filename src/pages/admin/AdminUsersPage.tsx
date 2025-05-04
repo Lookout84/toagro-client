@@ -1,7 +1,7 @@
 import React from 'react';
 import { AdminLayout } from '@components/layout/AdminLayout';
-import { UsersList } from '@components/admin/UsersList';
-import { User } from '@types/auth.types';
+import { UsersList } from '../../components/admin/UsersList';
+import { User } from '../../types/auth.types';
 
 export const AdminUsersPage: React.FC = () => {
   const handleEdit = (user: User) => {

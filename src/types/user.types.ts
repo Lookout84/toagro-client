@@ -20,7 +20,7 @@ export interface UserChangePasswordData {
   newPassword: string;
 }
 
-export type User = {
+export type BasicUserData = {
   id: string;
   email: string;
   name: string;
